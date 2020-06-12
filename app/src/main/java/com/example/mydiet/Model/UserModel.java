@@ -7,9 +7,9 @@ public class UserModel {
     private Integer usia;
     private Integer berat;
     private Integer jenis_kelamin;
-    private Integer jenis_aktivitas;
+    private Double jenis_aktivitas;
 
-    public UserModel(Integer id, String nama, Integer tinggi, Integer usia, Integer berat, Integer jenis_kelamin, Integer jenis_aktivitas, Double kalori) {
+    public UserModel(Integer id, String nama, Integer tinggi, Integer usia, Integer berat, Integer jenis_kelamin, Double jenis_aktivitas, Double kalori) {
         this.id = id;
         this.nama = nama;
         this.tinggi = tinggi;
@@ -68,11 +68,11 @@ public class UserModel {
         this.jenis_kelamin = jenis_kelamin;
     }
 
-    public Integer getJenis_aktivitas() {
+    public Double getJenis_aktivitas() {
         return jenis_aktivitas;
     }
 
-    public void setJenis_aktivitas(Integer jenis_aktivitas) {
+    public void setJenis_aktivitas(Double jenis_aktivitas) {
         this.jenis_aktivitas = jenis_aktivitas;
     }
 

@@ -60,13 +60,12 @@
                 android:paddingTop="30dp"
                 android:paddingRight="20dp"
                 android:paddingBottom="30dp">
-
                 <TextView
                     android:id="@+id/labelEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:labelFor="@+id/email"
-                    android:text="Email : " />
+                    android:text="Nama : " />
 
                 <EditText
                     android:id="@+id/email"
@@ -75,7 +74,7 @@
                     android:layout_below="@id/labelEmail"
                     android:ems="10"
                     android:gravity=""
-                    android:hint="Email"
+                    android:hint="Name"
                     android:inputType="textPersonName" />
 
                 <TextView
@@ -95,7 +94,7 @@
                     android:ems="10"
                     android:gravity=""
                     android:hint="Tinggi badan"
-                    android:inputType="textPersonName" />
+                    android:inputType="number" />
 
                 <TextView
                     android:id="@+id/labelBeratBadan"
@@ -114,7 +113,7 @@
                     android:ems="10"
                     android:gravity=""
                     android:hint="Berat Badan"
-                    android:inputType="textPersonName" />
+                    android:inputType="number" />
 
                 <TextView
                     android:id="@+id/textUsia"
@@ -133,7 +132,7 @@
                     android:ems="10"
                     android:gravity=""
                     android:hint="Usia"
-                    android:inputType="textPersonName" />
+                    android:inputType="number" />
 
                 <TextView
                     android:id="@+id/textSex"

@@ -14,6 +14,8 @@ import android.widget.Spinner;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.mydiet.Model.ActivityType;
+import com.example.mydiet.Model.UserModel;
+import com.example.mydiet.SQLHelper.UserHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,13 +46,14 @@ public class LoginActivity extends AppCompatActivity {
     RadioButton rdPerempuan;
 
     private Double selectedActivity;
+    private UserHelper userHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
-
+        userHelper = new UserHelper(this);
         setSpinner();
     }
 
@@ -81,34 +84,58 @@ public class LoginActivity extends AppCompatActivity {
 
     @OnClick(R.id.button)
     public void onViewClicked() {
-        String name = email.getText().toString();
-        int tinggi = Integer.parseInt(tinggiBadan.getText().toString());
-        int berat = Integer.parseInt(beratBadan.getText().toString());
-        int usia =  Integer.parseInt(edUsia.getText().toString());
-        Integer rgSex = rdSex.getCheckedRadioButtonId();
-        int sex;
-        if (rgSex == rdLaki.getId()) {
-            sex = 1;
-        } else {
-            sex = 2;
+        if(validatorForm()){
+            String name = email.getText().toString();
+            int tinggi = Integer.parseInt(tinggiBadan.getText().toString());
+            int berat = Integer.parseInt(beratBadan.getText().toString());
+            int usia =  Integer.parseInt(edUsia.getText().toString());
+            Integer rgSex = rdSex.getCheckedRadioButtonId();
+            int sex;
+            if (rgSex == rdLaki.getId()) {
+                sex = 1;
+            } else {
+                sex = 2;
+            }
+            Double kalories = getCalories(tinggi,berat,usia,sex,selectedActivity);
+            Long id = userHelper.insertData(new UserModel(null,name,tinggi,usia,berat,sex,selectedActivity,kalories));
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.putExtra("id",id);
+            startActivity(intent);
         }
-        Double kalories = getCalories(tinggi,berat,usia,sex,selectedActivity);
 
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
+    }
+
+    private boolean validatorForm() {
+
+        if(email.getText().toString().matches("")){
+            email.setError("Required Field");
+            return false;
+        }
+
+        if(tinggiBadan.getText().toString().matches("") ){
+            tinggiBadan.setError("Required Field");
+            return false;
+        }
+
+        if(beratBadan.getText().toString().matches("") ){
+            beratBadan.setError("Required Field");
+            return false;
+        }
+
+        if(edUsia.getText().toString().matches("") ){
+            edUsia.setError("Required Field");
+            return false;
+        }
+
+        return  true;
     }
 
     private Double getCalories(int tinggi, int berat, int usia, int sex,double typeActivity) {
-        double mbr;
-
         if(sex == 1){
-            mbr = ( 447.593  + (9.247 * berat) + (3.098 * tinggi)  - (4.33 * usia)) * typeActivity;
+            return ( 447.593  + (9.247 * berat) + (3.098 * tinggi)  - (4.33 * usia)) * typeActivity;
         }else {
-            mbr = (88.362 + (13.397  * berat) + (4.799 * tinggi)  - (5.677 * usia)) * typeActivity;
+            return (88.362 + (13.397  * berat) + (4.799 * tinggi)  - (5.677 * usia)) * typeActivity;
         }
-
-        return  mbr;
-
 
     }
 }

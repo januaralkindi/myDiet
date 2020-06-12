@@ -1,6 +1,7 @@
 package com.example.mydiet;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
@@ -13,9 +14,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mydiet.Adapter.FoodAdapter;
 import com.example.mydiet.Model.Recipe;
+import com.example.mydiet.Model.UserModel;
 import com.example.mydiet.Rest.ApiClient;
 import com.example.mydiet.Rest.GetServices;
+import com.example.mydiet.SQLHelper.UserHelper;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 
 import butterknife.BindView;
@@ -32,8 +37,6 @@ public class MainActivity extends AppCompatActivity {
     TextView textWeight;
     @BindView(R.id.textHeight)
     TextView textHeight;
-    @BindView(R.id.textType)
-    TextView textType;
     @BindView(R.id.textCalories)
     TextView textCalories;
     @BindView(R.id.textCaloriesBreakfast)
@@ -48,27 +51,53 @@ public class MainActivity extends AppCompatActivity {
     TextView textCaloriesDinner;
     @BindView(R.id.DinnerRecyclerView)
     RecyclerView DinnerRecyclerView;
+    @BindView(R.id.txtToday)
+    TextView txtToday;
 
     private FoodAdapter foodAdapter;
     ProgressDialog progressDoalog;
+    private UserHelper userHelper;
+    private UserModel dataUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        Intent intent = getIntent();
+        long userId = intent.getLongExtra("id", 1);
         progressDoalog = new ProgressDialog(MainActivity.this);
-        fetchGetBreakFastFood();
-        fetchGetLunchFood();
-        fetchGetDinnerFood();
+        userHelper = new UserHelper(this);
+        dataUser = userHelper.getUserById(userId);
+        setUpdateTime();
+        setUpDataUser(dataUser);
+        fetchGetBreakFastFood(dataUser.getKalori() * 0.3);
+        fetchGetLunchFood(dataUser.getKalori() * 0.5);
+        fetchGetDinnerFood(dataUser.getKalori() * 0.2);
     }
 
-    private void fetchGetBreakFastFood() {
+    private void setUpdateTime() {
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("EEE, MMM d, ''yy");
+        String date = dateFormat.format(calendar.getTime());
+        txtToday.setText(date);
+    }
+
+    private void setUpDataUser(UserModel dataUser) {
+        textHeight.setText(dataUser.getTinggi().toString() + " cm");
+        textWeight.setText(dataUser.getBerat().toString() + "Kg");
+        int calories = (int) Math.ceil(dataUser.getKalori());
+        textCalories.setText(String.valueOf(calories) + "Kkkal");
+    }
+
+    private void fetchGetBreakFastFood(double kaloriBreakFast) {
         progressDoalog.setMessage("Loading....");
         progressDoalog.show();
-
+        int intKaloriBf = (int) Math.ceil(kaloriBreakFast);
+        String kaloriBf = String.valueOf(intKaloriBf);
+        textCaloriesBreakfast.setText(kaloriBf + " Kkal");
         GetServices services = ApiClient.getFoodRecipe().create(GetServices.class);
-        Call<List<Recipe>> call = services.getRecipe("225", 5, "9be917715c3f4ef98debcb575382f043");
+        Call<List<Recipe>> call = services.getRecipe(kaloriBf, String.valueOf(intKaloriBf + 50), 10, "9be917715c3f4ef98debcb575382f043");
         call.enqueue(new Callback<List<Recipe>>() {
             @Override
             public void onResponse(Call<List<Recipe>> call, Response<List<Recipe>> response) {
@@ -87,12 +116,14 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void fetchGetLunchFood() {
+    private void fetchGetLunchFood(double kaloriLunch) {
         progressDoalog.setMessage("Loading....");
         progressDoalog.show();
-
+        int intKaloriLnch = (int) Math.ceil(kaloriLunch);
+        String kaloriLnch = String.valueOf((int) Math.ceil(intKaloriLnch));
+        textCaloriesLunch.setText(kaloriLnch + " Kkal");
         GetServices services = ApiClient.getFoodRecipe().create(GetServices.class);
-        Call<List<Recipe>> call = services.getRecipe("1000", 5, "9be917715c3f4ef98debcb575382f043");
+        Call<List<Recipe>> call = services.getRecipe(kaloriLnch, String.valueOf(intKaloriLnch + 50), 10, "9be917715c3f4ef98debcb575382f043");
         call.enqueue(new Callback<List<Recipe>>() {
             @Override
             public void onResponse(Call<List<Recipe>> call, Response<List<Recipe>> response) {
@@ -118,12 +149,16 @@ public class MainActivity extends AppCompatActivity {
         lunchRecyclerView.setAdapter(foodAdapter);
     }
 
-    private void fetchGetDinnerFood() {
+    private void fetchGetDinnerFood(double kaloriDinner) {
         progressDoalog.setMessage("Loading....");
         progressDoalog.show();
+        int intKaloriDn = (int) Math.ceil(kaloriDinner);
+        String kaloriDn = String.valueOf(intKaloriDn);
+
+        textCaloriesDinner.setText(kaloriDn + " Kkal");
 
         GetServices services = ApiClient.getFoodRecipe().create(GetServices.class);
-        Call<List<Recipe>> call = services.getRecipe("100", 5, "9be917715c3f4ef98debcb575382f043");
+        Call<List<Recipe>> call = services.getRecipe(kaloriDn, String.valueOf(intKaloriDn + 50), 10, "9be917715c3f4ef98debcb575382f043");
         call.enqueue(new Callback<List<Recipe>>() {
             @Override
             public void onResponse(Call<List<Recipe>> call, Response<List<Recipe>> response) {

@@ -16,7 +16,8 @@ public interface GetServices {
 
     @GET("/recipes/findByNutrients")
     Call<List<Recipe>> getRecipe(
-            @Query("maxCalories") String parameter,
+            @Query("minCalories") String parameter,
+            @Query("maxCalories") String maxCalories,
             @Query("number") Integer number,
             @Query("apiKey") String apiKey
     );
