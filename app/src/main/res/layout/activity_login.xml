@@ -1,101 +1,198 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".LoginActivity">
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/my_toolbar"
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:background="?attr/colorPrimary"
-       >
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Sign In"
-                android:textSize="24dp"
-                android:textStyle="bold"
-                android:layout_gravity="center"
-                android:textColor="@color/textLight"
-                android:gravity="center"/>
-    </androidx.appcompat.widget.Toolbar>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/background_radius_corner"
-        android:orientation="vertical"
-        android:paddingBottom="80dp"
-        >
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="320dp"
+        android:background="?attr/colorPrimary">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_height="240dp"
-            android:src="@drawable/login_illustrator" />
-    </LinearLayout>
-    <RelativeLayout
+            android:gravity="center"
+            android:text="Sign In"
+            android:textColor="@color/textLight"
+            android:textSize="24dp"
+            android:textStyle="bold" />
+    </androidx.appcompat.widget.Toolbar>
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_gravity="center"
-        android:layout_marginTop="-60dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:paddingBottom="30dp"
-        android:background="@drawable/background_shadow"
-        android:paddingTop="30dp"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
         android:layout_height="wrap_content">
-        <TextView
-            android:id="@+id/labelEmail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Email : "
-            android:labelFor="@+id/email"
-            />
-        <EditText
-            android:id="@+id/email"
-            android:layout_below="@id/labelEmail"
-            android:layout_width="match_parent"
-            android:gravity=""
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Email"
-            android:inputType="textPersonName"
-          />
-        <TextView
-            android:id="@+id/labelPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/email"
-            android:text="Password : "
-            android:layout_marginTop="25dp"
-            android:labelFor="@+id/password"
-            />
-        <EditText
-            android:id="@+id/password"
-            android:layout_below="@+id/labelPassword"
-            android:layout_width="match_parent"
-            android:gravity=""
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Password"
-            android:inputType="textPersonName"
-             />
-    </RelativeLayout>
 
-    <Button
-        android:id="@+id/button"
-        android:layout_marginTop="50dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginLeft="20dp"
-        android:textColor="@color/textLight"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/button_gradient"
-        android:text="Sign in" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/background_radius_corner"
+                android:orientation="vertical"
+                android:paddingBottom="80dp">
+
+                <ImageView
+                    android:id="@+id/imageView2"
+                    android:layout_width="320dp"
+                    android:layout_height="240dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/login_illustrator" />
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="-60dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/background_shadow"
+                android:paddingLeft="20dp"
+                android:paddingTop="30dp"
+                android:paddingRight="20dp"
+                android:paddingBottom="30dp">
+
+                <TextView
+                    android:id="@+id/labelEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:labelFor="@+id/email"
+                    android:text="Email : " />
+
+                <EditText
+                    android:id="@+id/email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/labelEmail"
+                    android:ems="10"
+                    android:gravity=""
+                    android:hint="Email"
+                    android:inputType="textPersonName" />
+
+                <TextView
+                    android:id="@+id/labelTinggiBadan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/email"
+                    android:layout_marginTop="25dp"
+                    android:labelFor="@+id/password"
+                    android:text="Tinggi Badan : " />
+
+                <EditText
+                    android:id="@+id/tinggiBadan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/labelTinggiBadan"
+                    android:ems="10"
+                    android:gravity=""
+                    android:hint="Tinggi badan"
+                    android:inputType="textPersonName" />
+
+                <TextView
+                    android:id="@+id/labelBeratBadan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tinggiBadan"
+                    android:layout_marginTop="25dp"
+                    android:labelFor="@+id/beratBadan"
+                    android:text="Berat Badan : " />
+
+                <EditText
+                    android:id="@+id/beratBadan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/labelBeratBadan"
+                    android:ems="10"
+                    android:gravity=""
+                    android:hint="Berat Badan"
+                    android:inputType="textPersonName" />
+
+                <TextView
+                    android:id="@+id/textUsia"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/beratBadan"
+                    android:layout_marginTop="25dp"
+                    android:labelFor="@+id/beratBadan"
+                    android:text="Usia : " />
+
+                <EditText
+                    android:id="@+id/edUsia"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/textUsia"
+                    android:ems="10"
+                    android:gravity=""
+                    android:hint="Usia"
+                    android:inputType="textPersonName" />
+
+                <TextView
+                    android:id="@+id/textSex"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/edUsia"
+                    android:layout_marginTop="25dp"
+                    android:labelFor="@+id/beratBadan"
+                    android:text="Jenis Kelamin : " />
+                <RadioGroup
+                    android:id="@+id/rdSex"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="18dp"
+                    android:orientation="horizontal"
+                    android:layout_below="@id/textSex">
+                    <RadioButton
+                        android:id="@+id/rdLaki"
+                        android:layout_width="wrap_content"
+                        android:text="Laki Laki"
+                        android:checked="true"
+                        android:layout_height="wrap_content">
+
+                    </RadioButton>
+                    <RadioButton
+                        android:id="@+id/rdPerempuan"
+                        android:layout_width="wrap_content"
+                        android:text="Perempuan"
+                        android:layout_height="wrap_content">
+
+                    </RadioButton>
+                </RadioGroup>
+                <TextView
+                    android:id="@+id/textActivity"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/rdSex"
+                    android:layout_marginTop="25dp"
+                    android:labelFor="@+id/actvity"
+                    android:text="Jenis Aktivitas : " />
+                <Spinner
+                    android:id="@+id/spinnerActvity"
+                    android:layout_below="@id/textActivity"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="18dp"
+                    android:layout_height="wrap_content" />
+            </RelativeLayout>
+
+            <Button
+                android:id="@+id/button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="50dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/button_gradient"
+                android:text="Sign in"
+                android:layout_marginBottom="20dp"
+                android:textColor="@color/textLight" />
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>
