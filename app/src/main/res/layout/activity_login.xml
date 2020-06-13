@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
-            android:text="Sign In"
+            android:text="My Diet"
             android:textColor="@color/textLight"
             android:textSize="24dp"
             android:textStyle="bold" />
@@ -38,7 +38,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/background_radius_corner"
                 android:orientation="vertical"
-                android:paddingBottom="80dp">
+                android:paddingBottom="100dp">
 
                 <ImageView
                     android:id="@+id/imageView2"
@@ -46,6 +46,15 @@
                     android:layout_height="240dp"
                     android:layout_gravity="center"
                     android:src="@drawable/login_illustrator" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:textAlignment="center"
+                    android:layout_margin="20dp"
+                    android:textColor="@color/textLight"
+                    android:textSize="16dp"
+                    android:text="My Diet Adalah Aplikasi Perhitungan kalori yang dibutuhkan per hari dan merekomendasikan makanan yang sesuai dengan kebutuha kalori anda"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal" />
             </LinearLayout>
 
             <RelativeLayout
@@ -53,7 +62,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="-60dp"
+                android:layout_marginTop="-80dp"
                 android:layout_marginRight="20dp"
                 android:background="@drawable/background_shadow"
                 android:paddingLeft="20dp"
